@@ -57,7 +57,7 @@ function buildDocument(doc: vscode.TextDocument, editBuilder: vscode.TextEditorE
 	// When reached a line not starting with |, if everything is valid, all table rows are updated
 	let tab = new Table();
 	// padding for the table is taken from paddingTable, then from paddingDefault and finally set to 0
-	let tabPadding = settings.paddingTable > 0 ? settings.paddingTable : settings.paddingDefault > 0 ? settings.paddingDefault : 0;
+	let tabPadding = settings.paddingTable > 0 ? settings.paddingTable : settings.paddingDefault > 0 ? settings.paddingDefault : -1;
 
 	for (let pos = 0; pos < doc.lineCount; pos++) {
 		let line = LineFactory.create(pos, doc);
