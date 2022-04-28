@@ -2,6 +2,25 @@
 
 This extension makes a simple format of Gherkin feature files by modifying the line indent depending on the words starting the line
 
+## Value added
+
+The value added by this extension compared with others is the possibility of including padding for lines
+beginning with custom strings. This way you are not limitted to Gherkin standard nomenclature or to the used language in the feature.
+For example, suppose that your features definition include some actions in a section called _Before Action_. You can set a dedicated
+padding for the lines beginning with _Before Action_. Besides, the default padding could be used to define the indent of the rest of lines
+in that section. 
+
+ * Lines starting with 'Before Action' having a padding of 2 spaces
+ * Default padding set to 4 spaces
+
+produces something like
+
+```
+  Before Action:
+    Anything you need here
+    will have a padding of 4 spaces
+    as indicated in the default padding
+```
 ## Features
 
  * Define the padding to apply to a certain line depending on the words starting such line. For example, all lines starting with 'Given' have a padding of 4. Lines starting with 'Scenario Outline' have a padding of 2. There is not an specific set of words or phrases to consider for the padding with default values, so you need to define each one you want the extension to consider
