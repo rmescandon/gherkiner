@@ -1,8 +1,8 @@
 {
   "name": "gherkiner",
   "displayName": "Gherkiner",
-  "description": "Awesome formatter for toolium features",
-  "version": "0.0.3",
+  "description": "Awesome formatter for Gherkin features",
+  "version": "0.0.4",
   "publisher": "rmescandon",
   "repository": {
     "type": "git",

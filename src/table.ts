@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
 import { ILine, Line } from './line';
-import { Strings } from './utils';
+import { Strings, Separators } from './utils';
 
 export interface IData {
     columns: string[]
     toString(max: number[]): string
 }
 
-export interface ITableLine extends ILine{
+export interface ITableLine extends ILine {
     data: IData
     isValid(): boolean
 }
@@ -17,8 +17,8 @@ export class TableLine extends Line {
 
     constructor(line: ILine) {
         super(line.pos, line.indent, line.content);
-       
-    
+
+
         this.data = new Data([]);
     }
 
@@ -29,11 +29,11 @@ export class TableLine extends Line {
             return false;
         }
 
-        if (!validBoundaries(content)) {
+        if (!Separators.validBoundaries(content)) {
             return false;
         }
 
-        if (countSeparators(content) < 2) {
+        if (Separators.count(content) < 2) {
             return false;
         }
 
@@ -79,7 +79,7 @@ export class Table {
     }
 
     push(line: ITableLine) {
-        this.empty() ?  this.buildHeaders(line) : this.pushRow(line);
+        this.empty() ? this.buildHeaders(line) : this.pushRow(line);
     }
 
     // returns true if the line is a valid table header
@@ -93,7 +93,12 @@ export class Table {
             return;
         }
 
-        let tokens = Strings.split(line.content, "|");
+        // split the line in an array of tokens considerig | as separator.
+        // Get rid of first and last element and take the inner ones
+        let tokens = Strings.strip(
+            Strings.split(line.content, "|")
+        );
+
         tokens.forEach(token => this.columnMaxLength.push(token.length));
 
         line.data = new Data(tokens);
@@ -112,9 +117,12 @@ export class Table {
             this.valid = false;
             return;
         }
-    
 
-        let tokens = Strings.split(line.content, "|");
+        // split the line in an array of tokens considerig | as separator.
+        // Get rid of first and last element and take the inner ones
+        let tokens = Strings.strip(
+            Strings.split(line.content, "|")
+        );
 
         // check the number of headers matches the number of tokens in line
         if (tokens.length !== this.columnMaxLength.length) {
@@ -128,7 +136,7 @@ export class Table {
                 this.columnMaxLength[i] = len;
             }
         }
-        
+
         line.data = new Data(tokens);
         this.rows.push(line);
     }
@@ -148,26 +156,10 @@ export class Table {
 
         this.headers?.updateContent(this.headers.data.toString(this.columnMaxLength), editBuilder);
         this.headers?.updatePadding(paddingStr, editBuilder);
-        
+
         for (let row of this.rows) {
             row.updateContent(row.data.toString(this.columnMaxLength), editBuilder);
             row.updatePadding(paddingStr, editBuilder);
         }
     }
-}
-
-function validBoundaries(str: string): boolean {
-    if (str.charAt(0) !== '|') {
-        return false;
-    }
-
-    if (str.charAt(str.length - 1) !== '|') {
-        return false;
-    }
-
-    return true;
-}
-
-function countSeparators(str: string): number {
-    return (str.match(/\|/g) || []).length;
 }

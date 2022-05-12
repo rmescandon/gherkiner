@@ -4,9 +4,8 @@ import * as vscode from 'vscode';
 import { SettingsProvider, ISettings } from './settings';
 
 import { File } from './utils';
-import { Line, ILine, LineFactory } from './line';
-import { ITableLine, Table, TableLine } from './table';
-import { table } from 'console';
+import { Line, LineFactory } from './line';
+import { Table, TableLine } from './table';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -20,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
 	if (settings.formatOnSave) {
 		context.subscriptions.push(
 			vscode.workspace.onWillSaveTextDocument(formatFeature));
-	} 
+	}
 }
 
 // this method is called when your extension is deactivated
@@ -62,18 +61,21 @@ function buildDocument(doc: vscode.TextDocument, editBuilder: vscode.TextEditorE
 	for (let pos = 0; pos < doc.lineCount; pos++) {
 		let line = LineFactory.create(pos, doc);
 
-		if (line.isTableLine()) {
-			if (tab.empty()) {
-				tab = new Table();
+		// address table lines
+		if (tabPadding >= 0) {
+			if (line.isTableLine()) {
+				if (tab.empty()) {
+					tab = new Table();
+				}
+				tab.push(new TableLine(line));
+				continue;
 			}
-			tab.push(new TableLine(line));
-			continue;
-		}
 
-		if (!tab.empty() && tab.valid) {
-			const paddingStr = settings.paddingSymbol.repeat(tabPadding);
-			tab.update(paddingStr, editBuilder);
-			tab.reset();
+			if (!tab.empty() && tab.valid) {
+				const paddingStr = settings.paddingSymbol.repeat(tabPadding);
+				tab.update(paddingStr, editBuilder);
+				tab.reset();
+			}
 		}
 
 		// if empty line, reset tagLines array, draw table if not empty and continue

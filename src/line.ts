@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { Separators } from './utils';
 
 
 export interface ILine {
@@ -6,7 +7,7 @@ export interface ILine {
     readonly indent: number
     readonly content: string
 
-    isEmpty(): boolean 
+    isEmpty(): boolean
 
     isTagLine(): boolean
     isKeywordLine(keyword: string): boolean
@@ -16,7 +17,7 @@ export interface ILine {
     updateContent(newContent: string, editBuilder: vscode.TextEditorEdit): void
 }
 
-export class LineFactory  {
+export class LineFactory {
     static create(pos: number, doc: vscode.TextDocument): ILine {
         let line = doc.lineAt(pos);
 
@@ -98,12 +99,13 @@ export class Line implements ILine {
         if (this.content.length < 2) {
             return false;
         }
-        if (this.content.charAt(0) !== '|') {
+        if (!Separators.validBoundaries(this.content)) {
             return false;
         }
-        if (this.content.charAt(this.content.length - 1) !== '|') {
+        if (Separators.count(this.content) < 2) {
             return false;
         }
+
         return true;
     }
 }
