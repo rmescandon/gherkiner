@@ -10,9 +10,21 @@ import { Table, TableLine } from './table';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	// register menu command
-	let format = vscode.commands.registerCommand('gherkiner.formatFeature', formatFeature);
-	context.subscriptions.push(format);
+	// formatter implemented using API
+	vscode.languages.registerDocumentFormattingEditProvider('feature', {
+        provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+			// execute the format directly because it was already implemented that way.
+			// The alternative is using the 'document' param and returning an array with
+			// the edit operations to achieve. Something like:
+			//
+			//  const firstLine = document.lineAt(0);
+			//	if (firstLine.text !== '42') {
+			//		return [vscode.TextEdit.insert(firstLine.range.start, '42\n')];
+			//	}
+			formatFeature();
+			return [];
+        }
+    });
 
 	// when formatOnSave is set, enable the formatting when saving the document
 	const settings = new SettingsProvider().settings;

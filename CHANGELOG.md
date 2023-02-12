@@ -26,3 +26,10 @@
     - bugfix: tables trailing blanks were treated as not valid
     - bugfix: table lines with empty cells were not treated
     - bugfix: padding lines did not work when table padding was -1
+
+## 1.0.0
+
+* Release data: 2023-02-11
+
+    - feature: extension works now as a formatter for .feature files
+    - removed: the original ad-hoc menu entry in contextual menu
