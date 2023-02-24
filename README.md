@@ -42,7 +42,7 @@ produces something like
 ![Example](assets/gherkiner.gif)
 
 There are two options to use the extension:
- + Selecting the contextual menu option **format feature**
+ + **On demand**. Configure the extension as the formater for *.feature* files and select the contextual menu option **Format Document**
  + **On file save**. This only works if _gherkiner.formatOnSave_ flag is set
 
 ## Settings

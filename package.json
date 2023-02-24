@@ -2,7 +2,7 @@
   "name": "gherkiner",
   "displayName": "Gherkiner",
   "description": "Awesome formatter for Gherkin features",
-  "version": "0.0.4",
+  "version": "1.0.1",
   "publisher": "rmescandon",
   "repository": {
     "type": "git",
@@ -15,36 +15,32 @@
   },
   "icon": "assets/icon.png",
   "keywords": [
-    "indent",
-    "paddng",
-    "tab",
     "gherkin",
-    "space",
-    "spacing"
+    "feature"
   ],
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "activationEvents": [
-    "onCommand:gherkiner.formatFeature"
+    "onLanguage:feature"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "languages": [
       {
-        "command": "gherkiner.formatFeature",
-        "title": "Format Feature"
+        "id": "feature",
+        "aliases": [
+          "feature",
+          "gherkin",
+          "Gherkin",
+          "cucumber"
+        ],
+        "extensions": [
+          ".feature",
+          ".testcase"
+        ]
       }
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "resourceLangId == feature",
-          "command": "gherkiner.formatFeature",
-          "group": "modification"
-        }
-      ]
-    },
     "configuration": [
       {
         "title": "Gherkiner",
@@ -88,6 +84,11 @@
             "type": "boolean",
             "default": false,
             "description": "when enabled, the document is formatted when saved"
+          },
+          "gherkiner.fixtureLineBreak": {
+            "type": "boolean",
+            "default": false,
+            "description": "when enabled, inserts a line break just before any @fixture tag that is not at the beginning of a line"
           }
         }
       }
