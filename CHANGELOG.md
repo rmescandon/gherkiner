@@ -33,3 +33,9 @@
 
     - feature: extension works now as a formatter for .feature files
     - removed: the original ad-hoc menu entry in contextual menu
+
+## 1.0.1
+
+* Release data: 2023-02-24
+
+    - feature: fixtureLineBreak setting inserts a line break before found @fixture tags

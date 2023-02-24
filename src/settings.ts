@@ -11,6 +11,7 @@ export interface ISettings {
     paddingTable: number
     paddings: IPadding[]
     formatOnSave: boolean
+    fixtureLineBreak: boolean
 }
 
 export class SettingsProvider {
@@ -24,6 +25,7 @@ export class SettingsProvider {
         const paddingTable = this.readPaddingTable(cfg);
         const paddings = this.readPaddings(cfg);
         const formatOnSave = this.readFormatOnSave(cfg);
+        const fixtureLineBreak = this.readFixtureLineBreak(cfg);
 
         return {
             paddingSymbol,
@@ -31,6 +33,7 @@ export class SettingsProvider {
             paddingTable,
             paddings,
             formatOnSave,
+            fixtureLineBreak,
         };
     }
 
@@ -52,5 +55,9 @@ export class SettingsProvider {
 
     private readFormatOnSave(cfg: vscode.WorkspaceConfiguration): boolean {
         return cfg.get<boolean>('gherkiner.formatOnSave') ?? false;
+    }
+
+    private readFixtureLineBreak(cfg: vscode.WorkspaceConfiguration): boolean {
+        return cfg.get<boolean>('gherkiner.fixtureLineBreak') ?? false;
     }
 }

@@ -2,7 +2,7 @@
   "name": "gherkiner",
   "displayName": "Gherkiner",
   "description": "Awesome formatter for Gherkin features",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "rmescandon",
   "repository": {
     "type": "git",
@@ -84,6 +84,11 @@
             "type": "boolean",
             "default": false,
             "description": "when enabled, the document is formatted when saved"
+          },
+          "gherkiner.fixtureLineBreak": {
+            "type": "boolean",
+            "default": false,
+            "description": "when enabled, inserts a line break just before any @fixture tag that is not at the beginning of a line"
           }
         }
       }
