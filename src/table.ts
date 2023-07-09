@@ -59,6 +59,8 @@ class Data implements IData {
 }
 
 export class Table {
+    // separator is | not preceded by \ character, so it is not escaped
+    columnsSeparator: RegExp = /(?<!\\)\|/;
     columnMaxLength: number[] = [];
     valid: boolean = true;
 
@@ -96,7 +98,7 @@ export class Table {
         // split the line in an array of tokens considerig | as separator.
         // Get rid of first and last element and take the inner ones
         let tokens = Strings.strip(
-            Strings.split(line.content, "|")
+            Strings.split(line.content, this.columnsSeparator)
         );
 
         tokens.forEach(token => this.columnMaxLength.push(token.length));
@@ -121,7 +123,7 @@ export class Table {
         // split the line in an array of tokens considerig | as separator.
         // Get rid of first and last element and take the inner ones
         let tokens = Strings.strip(
-            Strings.split(line.content, "|")
+            Strings.split(line.content, this.columnsSeparator)
         );
 
         // check the number of headers matches the number of tokens in line

@@ -39,3 +39,9 @@
 * Release data: 2023-02-24
 
     - feature: fixtureLineBreak setting inserts a line break before found @fixture tags
+
+## 1.0.2
+
+* Release data: 2023-07-09
+
+    - bugfix: tables permit escaped | chars in their columns
