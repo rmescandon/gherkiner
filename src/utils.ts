@@ -1,5 +1,5 @@
 export class Strings {
-    static split(str: string, sep: string): string[] {
+    static split(str: string, sep: RegExp): string[] {
         return str.trim().split(sep).map(token => token.trim());
     }
 
@@ -34,7 +34,7 @@ export class Separators {
     }
 
     static count(str: string): number {
-        return (str.match(/\|/g) || []).length;
+        // matches | but not \| (escaped)
+        return (str.match(/(?<!\\)\|/g) || []).length;
     }
-
 }
