@@ -45,3 +45,11 @@
 * Release data: 2023-07-09
 
     - bugfix: tables permit escaped | chars in their columns
+
+## 1.0.3
+
+* Release data: 2023-10-26
+
+    - feature: normalize lines starting with keywords to leave exactly one blank just after it and before the rest of the line
+    - feature: new setting for trimming several consecutive blank lines to one
+    - bugfix: blank lines padding removed
