@@ -89,6 +89,11 @@
             "type": "boolean",
             "default": false,
             "description": "when enabled, inserts a line break just before any @fixture tag that is not at the beginning of a line"
+          },
+          "gherkiner.consecutiveBlankLinesToOne": {
+            "type": "boolean",
+            "default": false,
+            "description": "when enabled, reduces all consecutive blank lines to one"
           }
         }
       }

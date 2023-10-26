@@ -4,7 +4,7 @@ import * as vscode from "vscode";
 import { SettingsProvider, ISettings } from "./settings";
 
 import { File, Strings } from "./utils";
-import { Line, LineFactory } from "./line";
+import { Line, LineFactory, Lines } from "./line";
 import { Table, TableLine } from "./table";
 
 // this method is called when your extension is activated
@@ -74,7 +74,9 @@ function buildDocument(
   // Second and next lines are validated against number of cells and the length of every cell is now recalculated.
   // When reached a line not starting with |, if everything is valid, all table rows are updated
   let tab = new Table();
-  // padding for the table is taken from paddingTable, then from paddingDefault and finally set to 0
+  // padding for the table is taken from paddingTable setting.
+  // When not set paddingTable it is taken from paddingDefault.
+  // and finally not set (set to -1) if none of the above is set
   let tabPadding =
     settings.paddingTable > 0
       ? settings.paddingTable
@@ -82,6 +84,7 @@ function buildDocument(
       ? settings.paddingDefault
       : -1;
 
+  let emptyLines = new Lines();
   for (let pos = 0; pos < doc.lineCount; pos++) {
     let line = LineFactory.create(pos, doc);
 
@@ -105,7 +108,20 @@ function buildDocument(
     // if empty line, reset tagLines array, draw table if not empty and continue
     if (line.isEmpty()) {
       tagLines = [];
+
+      // treat the blank line according to the settings, either removing its padding or leaving one
+      if (settings.consecutiveBlankLinesToOne) {
+        emptyLines.append(line);
+      } else {
+        line.updatePadding("", editBuilder);
+      }
       continue;
+    }
+
+    // if not empty line and list of empty lines is not empty, reduce all of them to a single one
+    if (!emptyLines.isEmpty()) {
+      emptyLines.updateContent("", editBuilder);
+      emptyLines.reset();
     }
 
     // if current line starts with @, append its number of line to the array of tag lines until finding
