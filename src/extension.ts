@@ -3,7 +3,7 @@
 import * as vscode from "vscode";
 import { SettingsProvider, ISettings } from "./settings";
 
-import { File } from "./utils";
+import { File, Strings } from "./utils";
 import { Line, LineFactory, Lines } from "./line";
 import { Table, TableLine } from "./table";
 
@@ -132,9 +132,19 @@ function buildDocument(
     }
 
     // find a a keyword that matches the line initial string
-    let p = settings.paddings.find((padding) =>
-      padding ? line.isKeywordLine(padding.keyword) : undefined
-    );
+    let p = settings.paddings.find((padding) => {
+      if (padding) {
+        if (line.isKeywordLine(padding.keyword)) {
+          // normalize the line content to have exactly one space after the keyword
+          line.updateContent(
+            Strings.normalizeToJustOneSpaceAfterPrefix(line.content, padding.keyword),
+            editBuilder,
+          );
+          return padding;
+        }
+      }
+      return undefined;
+    });
 
     // use default padding when not found a keywork padding
     let padding = settings.paddingDefault;
