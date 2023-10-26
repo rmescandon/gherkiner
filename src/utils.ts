@@ -10,6 +10,15 @@ export class Strings {
         }
         return arr;
     }
+
+    static normalizeToJustOneSpaceAfterPrefix(content: string, prefix: string): string {
+        /**
+         * This function normalizes the content of a line by removing all the spaces
+         * after the prefix and leaving just one space.
+         */
+        let regex = new RegExp(prefix + "\\s*");
+        return content.replace(regex, prefix + " ");
+    }
 }
 
 export class File {
