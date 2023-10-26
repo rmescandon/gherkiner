@@ -37,6 +37,8 @@ produces something like
 
  * Format on save. There is a contextual menu entry to apply the format to the current open features file, but you can also enable the formatting when saving the document
 
+ * Normalizes lines with reserved words to have exactly one line after the reserved word
+
 ## Usage
 
 ![Example](assets/gherkiner.gif)
@@ -52,6 +54,8 @@ Define the extension settings in the _.vscode/settings.json_ file
 | Setting | Description | Type |Default value |
 |---------|-------------|------|---------------|
 | gherkiner.formatOnSave | indicates whether formatting the feature when saving the file | boolean | false |
+| gherkiner.consecutiveBlankLinesToOne | indicates whether consecutive blank lines in the document should be trimmed to just one line | boolean | false |
+| gherkiner.fixtureLineBreak | indicates whether feature should leave every @fixture tag in its own line | boolean | false |
 | gherkiner.padding.symbol | the symbol ('tab' or 'space') to use for padding the lines | string | space |
 | gherkiner.padding.default | how many symbols to pad for all the regular lines whose padding has not been explicitly set | integer | (not set) |
 | gherkiner.padding.table | the padding to apply to lines belonging to tables | integer | (not set) |
@@ -68,6 +72,7 @@ Here's an example configuration that aligns vertically, after the prefix, the Gi
     "gherkiner.padding.default": 4,
     "gherkiner.padding.table": 10,
     "gherkiner.formatOnSave": true,
+    "gherkiner.consecutiveBlankLinesToOne": false,
     "gherkiner.paddings": [
         {
             "keyword": "Feature",
