@@ -12,6 +12,7 @@ export interface ISettings {
     paddings: IPadding[]
     formatOnSave: boolean
     fixtureLineBreak: boolean
+    consecutiveBlankLinesToOne: boolean
 }
 
 export class SettingsProvider {
@@ -26,6 +27,7 @@ export class SettingsProvider {
         const paddings = this.readPaddings(cfg);
         const formatOnSave = this.readFormatOnSave(cfg);
         const fixtureLineBreak = this.readFixtureLineBreak(cfg);
+        const consecutiveBlankLinesToOne = this.readConsecutiveBlankLinesToOne(cfg);
 
         return {
             paddingSymbol,
@@ -34,6 +36,7 @@ export class SettingsProvider {
             paddings,
             formatOnSave,
             fixtureLineBreak,
+            consecutiveBlankLinesToOne,
         };
     }
 
@@ -59,5 +62,9 @@ export class SettingsProvider {
 
     private readFixtureLineBreak(cfg: vscode.WorkspaceConfiguration): boolean {
         return cfg.get<boolean>('gherkiner.fixtureLineBreak') ?? false;
+    }
+
+    private readConsecutiveBlankLinesToOne(cfg: vscode.WorkspaceConfiguration): boolean {
+        return cfg.get<boolean>('gherkiner.consecutiveBlankLinesToOne') ?? false;
     }
 }

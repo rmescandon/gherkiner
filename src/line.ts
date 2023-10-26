@@ -109,3 +109,32 @@ export class Line implements ILine {
         return true;
     }
 }
+
+
+export class Lines {
+    lines: ILine[] = [];
+
+    append(line: ILine) {
+        this.lines.push(line);
+    }
+
+    isEmpty(): boolean {
+        return this.lines.length === 0;
+    }
+
+    reset() {
+        this.lines = [];
+    }
+
+    updateContent(newContent: string, editBuilder: vscode.TextEditorEdit) {
+        let startLine = this.lines[0];
+        let endLine = this.lines[this.lines.length - 1];
+        let startPos = new vscode.Position(startLine.pos, 0);
+        let endPos = new vscode.Position(endLine.pos, endLine.indent + endLine.content.length);
+        let range = new vscode.Range(startPos, endPos);
+        editBuilder.replace(
+            range,
+            newContent,
+        );
+    }
+}
