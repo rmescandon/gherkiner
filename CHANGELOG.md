@@ -53,3 +53,9 @@
     - feature: normalize lines starting with keywords to leave exactly one blank just after it and before the rest of the line
     - feature: new setting for trimming several consecutive blank lines to one
     - bugfix: blank lines padding removed
+
+## 1.0.4
+
+* Release data: 2023-10-27
+
+    - bugfix: keywords followed by a : should not be included in the normalized to just one blank rule
