@@ -16,7 +16,7 @@ export class Strings {
          * This function normalizes the content of a line by removing all the spaces
          * after the prefix and leaving just one space.
          */
-        let regex = new RegExp(prefix + "\\s*");
+        let regex = new RegExp(prefix + "\\s+");
         return content.replace(regex, prefix + " ");
     }
 }
