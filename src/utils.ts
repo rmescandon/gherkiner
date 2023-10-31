@@ -14,10 +14,10 @@ export class Strings {
     static normalizeToJustOneSpaceAfterPrefix(content: string, prefix: string): string {
         /**
          * This function normalizes the content of a line by removing all the spaces
-         * after the prefix and leaving just one space.
+         * after the prefix and leaving just one space. In the case of a reserved word
+         * followed by a : it is also considered
          */
-        let regex = new RegExp(prefix + "\\s+");
-        return content.replace(regex, prefix + " ");
+        return content.replace(new RegExp(`(${prefix})\\s*(:?)\\s+`), "$1$2 ");
     }
 }
 

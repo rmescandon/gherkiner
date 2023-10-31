@@ -59,3 +59,9 @@
 * Release data: 2023-10-27
 
     - bugfix: keywords followed by a : should not be included in the normalized to just one blank rule
+
+## 1.0.5
+
+* Release data: 2023-10-31
+
+    - bugfix: keywords followed by a : included in the normalized to just one blank rule, but after the :
