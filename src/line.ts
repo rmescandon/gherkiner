@@ -1,4 +1,3 @@
-import * as vscode from "vscode";
 import { Separators } from "./utils";
 import { TextEditorEdit, Range, Position } from "./editor";
 
@@ -51,12 +50,12 @@ export class Line implements ILine {
     if (this.indent < 0) {
       return;
     }
-    let startPos = new vscode.Position(this.pos, this.indent);
-    let endPos = new vscode.Position(
+    let startPos = new Position(this.pos, this.indent);
+    let endPos = new Position(
       this.pos,
       this.indent + this.content.length
     );
-    let range = new vscode.Range(startPos, endPos);
+    let range = new Range(startPos, endPos);
     editBuilder.replace(range, newContent);
   }
 
