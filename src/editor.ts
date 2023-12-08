@@ -1,5 +1,3 @@
-import * as vscode from "vscode";
-
 export class Position {
   readonly line: number;
   readonly character: number;

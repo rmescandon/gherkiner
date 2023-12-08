@@ -1,6 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { ISettings } from "./settings";
+import { Settings } from "./settings";
 
 import { Strings } from "./utils";
 import { Line, LineFactory, Lines } from "./line";
@@ -10,7 +10,7 @@ import { TextEditorEdit } from "./editor";
 export function buildDocument(
   docLines: string[],
   editBuilder: TextEditorEdit,
-  settings: ISettings
+  settings: Settings
 ) {
   // tagLines is an array of consecutive lines starting with a tag. When the next line to the last with tag
   // switches to a padded line, all them take the same padding. When that next line is not padded, the array
