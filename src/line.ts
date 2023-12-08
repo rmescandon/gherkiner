@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Separators } from "./utils";
+import { TextEditorEdit, Range, Position } from "./editor";
 
 export interface ILine {
   readonly pos: number;
@@ -12,8 +13,8 @@ export interface ILine {
   isKeywordLine(keyword: string): boolean;
   isTableLine(): boolean;
 
-  updatePadding(paddingStr: string, editBuilder: vscode.TextEditorEdit): void;
-  updateContent(newContent: string, editBuilder: vscode.TextEditorEdit): void;
+  updatePadding(paddingStr: string, editBuilder: TextEditorEdit): void;
+  updateContent(newContent: string, editBuilder: TextEditorEdit): void;
 }
 
 export class LineFactory {
@@ -36,17 +37,17 @@ export class Line implements ILine {
   }
 
   // update a document line with a certain padding
-  updatePadding(paddingStr: string, editBuilder: vscode.TextEditorEdit) {
+  updatePadding(paddingStr: string, editBuilder: TextEditorEdit) {
     if (this.indent < 0) {
       return;
     }
-    let startPos = new vscode.Position(this.pos, 0);
-    let endPos = new vscode.Position(this.pos, this.indent);
-    let range = new vscode.Range(startPos, endPos);
+    let startPos = new Position(this.pos, 0);
+    let endPos = new Position(this.pos, this.indent);
+    let range = new Range(startPos, endPos);
     editBuilder.replace(range, paddingStr);
   }
 
-  updateContent(newContent: string, editBuilder: vscode.TextEditorEdit) {
+  updateContent(newContent: string, editBuilder: TextEditorEdit) {
     if (this.indent < 0) {
       return;
     }
@@ -119,15 +120,15 @@ export class Lines {
     this.lines = [];
   }
 
-  updateContent(newContent: string, editBuilder: vscode.TextEditorEdit) {
+  updateContent(newContent: string, editBuilder: TextEditorEdit) {
     let startLine = this.lines[0];
     let endLine = this.lines[this.lines.length - 1];
-    let startPos = new vscode.Position(startLine.pos, 0);
-    let endPos = new vscode.Position(
+    let startPos = new Position(startLine.pos, 0);
+    let endPos = new Position(
       endLine.pos,
       endLine.indent + endLine.content.length
     );
-    let range = new vscode.Range(startPos, endPos);
+    let range = new Range(startPos, endPos);
     editBuilder.replace(range, newContent);
   }
 }
