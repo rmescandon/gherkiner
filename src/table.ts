@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
 import { ILine, Line } from './line';
 import { Strings, Separators } from './utils';
+import { TextEditorEdit } from './editor';
 
 export interface IData {
     columns: string[]
@@ -147,7 +147,7 @@ export class Table {
         return !this.headers;
     }
 
-    update(paddingStr: string, editBuilder: vscode.TextEditorEdit) {
+    update(paddingStr: string, editBuilder: TextEditorEdit) {
         if (!this.valid) {
             return;
         }

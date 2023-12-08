@@ -6,6 +6,25 @@ import { SettingsProvider } from "./settings";
 import { File } from "./utils";
 
 import { buildDocument } from "./core";
+import { TextEditorEdit, Range } from "./editor";
+
+class ExtensionTextEditorEdit {
+  editor: vscode.TextEditorEdit;
+
+  constructor(editor: vscode.TextEditorEdit) {
+    this.editor = editor;
+  }
+
+  replace(range: Range, value: string): void {
+    this.editor.replace(
+      new vscode.Range(
+        new vscode.Position(range.start.line, range.start.character),
+        new vscode.Position(range.end.line, range.end.character)
+      ),
+      value
+    );
+  }
+}
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -58,6 +77,7 @@ function formatFeature() {
   }
 
   editor.edit((editBuilder) => {
-    buildDocument(lines, editBuilder, settings);
+    let eb = new TextEditorEdit(new ExtensionTextEditorEdit(editBuilder));
+    buildDocument(lines, eb, settings);
   });
 }
