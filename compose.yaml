@@ -1,0 +1,9 @@
+services:
+  gherkiner:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      DEBUG: 0
+    volumes:
+      - $PWD:/data
