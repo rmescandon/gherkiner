@@ -125,5 +125,6 @@
   "dependencies": {
     "commander": "^11.1.0",
     "figlet": "^1.7.0"
-  }
+  },
+  "bin": "./out/cli.js"
 }

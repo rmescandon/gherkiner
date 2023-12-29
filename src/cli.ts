@@ -104,19 +104,16 @@ let settings = {
 //add the following line
 const program = new Command();
 
-console.log(figlet.textSync("Gerkiner"));
-
 program
   .version("1.0.0")
   .description("CLI to format Gherkin feature files")
   .option("-v", "Verbose")
   .parse(process.argv);
 
-// const options = program.opts();
-
-// if (options.v) {
-//   console.log("VERBOSE");
-// }
+const options = program.opts();
+if (options.v) {
+  console.log(figlet.textSync("Gerkiner"));
+}
 
 let lines = fs.readFileSync(program.args[0], "utf-8").split("\n");
 
@@ -124,3 +121,7 @@ let eb = new TextEditorEdit(new CliTextEditorEdit(lines));
 buildDocument(lines, eb, settings);
 
 fs.writeFileSync(program.args[0], lines.join("\n"));
+
+if (options.v) {
+  console.log("formatted file: " + program.args[0]);
+}
