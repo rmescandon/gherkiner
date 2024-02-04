@@ -1,130 +1,24 @@
 {
-  "name": "gherkiner",
-  "displayName": "Gherkiner",
-  "description": "Awesome formatter for Gherkin features",
-  "version": "1.1.0",
-  "publisher": "rmescandon",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rmescandon/gherkiner.git"
-  },
-  "bugs": "https://github.com/rmescandon/gherkiner/issues/",
-  "homepage": "https://github.com/rmescandon/gherkiner/blob/master/README.md",
-  "engines": {
-    "vscode": "^1.66.0"
-  },
-  "icon": "assets/icon.png",
-  "keywords": [
-    "gherkin",
-    "feature"
+  "name": "gherkiner-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo for gherkiner apps and extensions",
+  "workspaces": [
+	  "cli",
+    "vscode-extension",
+	  "shared"
   ],
-  "categories": [
-    "Formatters"
-  ],
-  "activationEvents": [
-    "onLanguage:feature"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "languages": [
-      {
-        "id": "feature",
-        "aliases": [
-          "feature",
-          "gherkin",
-          "Gherkin",
-          "cucumber"
-        ],
-        "extensions": [
-          ".feature",
-          ".testcase"
-        ]
-      }
-    ],
-    "configuration": [
-      {
-        "title": "Gherkiner",
-        "properties": {
-          "gherkiner.padding.symbol": {
-            "type": "string",
-            "enum": [
-              "space",
-              "tab"
-            ],
-            "default": "space",
-            "description": "What padding symbol to use"
-          },
-          "gherkiner.paddings": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "keyword": {
-                  "type": "string",
-                  "description": "Word or words which prefixes the lines to indent"
-                },
-                "padding": {
-                  "type": "number",
-                  "description": "The number of symbols to pad before starting the line"
-                }
-              }
-            }
-          },
-          "gherkiner.padding.default": {
-            "type": "number",
-            "default": -1,
-            "description": "the default padding to apply to all the lines not having an specific keyword prefix"
-          },
-          "gherkiner.padding.table": {
-            "type": "number",
-            "default": -1,
-            "description": "the paddint to apply to all document tables"
-          },
-          "gherkiner.formatOnSave": {
-            "type": "boolean",
-            "default": false,
-            "description": "when enabled, the document is formatted when saved"
-          },
-          "gherkiner.fixtureLineBreak": {
-            "type": "boolean",
-            "default": false,
-            "description": "when enabled, inserts a line break just before any @fixture tag that is not at the beginning of a line"
-          },
-          "gherkiner.consecutiveBlankLinesToOne": {
-            "type": "boolean",
-            "default": false,
-            "description": "when enabled, reduces all consecutive blank lines to one"
-          }
-        }
-      }
-    ]
-  },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "cli": "npx tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@types/figlet": "^1.5.8",
-    "@types/glob": "^7.2.0",
-    "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
-    "@types/vscode": "^1.66.0",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
-    "@vscode/test-electron": "^2.1.3",
     "eslint": "^8.11.0",
-    "glob": "^7.2.0",
-    "mocha": "^9.2.2",
     "typescript": "^4.5.5"
-  },
-  "dependencies": {
-    "commander": "^11.1.0",
-    "figlet": "^1.7.0"
-  },
-  "bin": "./out/cli.js"
+  }
 }

@@ -1,0 +1,30 @@
+{
+  "name": "gherkiner-cli",
+  "displayName": "Gherkiner CLI",
+  "description": "Awesome formatter for Gherkin features as command line interface",
+  "version": "1.1.0",
+  "publisher": "rmescandon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmescandon/gherkiner.git"
+  },
+  "bugs": "https://github.com/rmescandon/gherkiner/issues/",
+  "homepage": "https://github.com/rmescandon/gherkiner/blob/master/README.md",
+  "icon": "assets/icon.png",
+  "keywords": [
+    "gherkin",
+    "feature"
+  ],
+  "main": "./out/cli.js",
+  "scripts": {
+    "build": "npx tsc --build .",
+    "start": "npm run build -- --watch"
+  },
+  "bin": {
+    "gherkiner": "./bin/gherkiner"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0"
+  }
+}

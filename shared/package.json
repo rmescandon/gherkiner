@@ -1,0 +1,13 @@
+{
+  "name": "gherkiner-shared",
+  "version": "1.0.0",
+  "description": "shared code amongst gherkiner monorepo projects",
+  "main": "out/index.ts",
+  "types": "lib",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

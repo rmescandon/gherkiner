@@ -1,0 +1,21 @@
+{
+    "folders": [
+      {
+        "name": "ROOT",
+        "path": "../"
+      },
+      {
+        "name": "cli",
+        "path": "../cli"
+      },
+      {
+        "name": "vscode-extension",
+        "path": "../vscode-extension"
+      },
+      {
+        "name": "shared",
+        "path": "../shared"
+      }
+    ],
+    "settings": {}
+  }

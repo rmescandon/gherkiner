@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+node `dirname "$0"`/../lib/node_modules/gherkiner-cli/out/cli.js $@
