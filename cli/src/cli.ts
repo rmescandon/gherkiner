@@ -135,11 +135,16 @@ const program = new Command();
 program
   .version("1.0.0")
   .description("CLI to format Gherkin feature files")
-  .option("-v", "Verbose")
-  .option("-s, --settings <filepath>", "Settings file with the rules to use for the formatter")
+  .option("-v", "verbose execution")
+  .option("-s, --settings <filepath>", "settings file with the rules to use for the formatter")
   .parse(process.argv);
 
 const options = program.opts();
+if (options.help) {
+  program.help();
+  exit();
+}
+
 if (options.v) {
   console.log(figlet.textSync("Gerkiner"));
 }
