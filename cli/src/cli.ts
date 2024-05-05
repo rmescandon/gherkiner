@@ -1,8 +1,11 @@
 import figlet from "figlet";
+import path from "path";
 import { Command } from "commander";
 import { TextEditorEdit, Range } from "../../shared/out/editor";
 import { buildDocument } from "../../shared/out/core";
+import { Settings, Padding } from "../../shared/out/settings";
 import * as fs from "fs";
+import { exit } from "process";
 
 function replaceRange(
   s: string,
@@ -41,65 +44,90 @@ export class CliTextEditorEdit {
     );
   }
 }
-
-let settings = {
-  paddingSymbol: " ",
-  paddingDefault: 4,
-  paddingTable: 10,
-  paddings: [
+/*
+A modelic settings.json file used for a basic configuration of the formatter could be like:
+{
+ "padding": {
+    "symbol": "space",
+    "default": 4,
+    "table": 10
+  },
+  "paddings": [
     {
-      keyword: "Feature",
-      padding: 0,
+        "keyword": "Feature",
+        "padding": 0
     },
     {
-      keyword: "Scenario Outline",
-      padding: 2,
+        "keyword": "Scenario Outline",
+        "padding": 2
     },
     {
-      keyword: "Scenario",
-      padding: 2,
+        "keyword": "Scenario",
+        "padding": 2
     },
     {
-      keyword: "Given",
-      padding: 4,
+        "keyword": "Given",
+        "padding": 4
     },
     {
-      keyword: "When",
-      padding: 5,
+        "keyword": "When",
+        "padding": 5
     },
     {
-      keyword: "Then",
-      padding: 5,
+        "keyword": "Then",
+        "padding": 5
     },
     {
-      keyword: "And",
-      padding: 6,
+        "keyword": "And",
+        "padding": 6
     },
     {
-      keyword: "But",
-      padding: 6,
+        "keyword": "But",
+        "padding": 6
     },
     {
-      keyword: "Backgroud",
-      padding: 2,
+        "keyword": "Backgroud",
+        "padding": 2
     },
     {
-      keyword: "Action",
-      padding: 2,
+        "keyword": "Action",
+        "padding": 2
     },
     {
-      keyword: "Examples:",
-      padding: 4,
+        "keyword": "Examples:",
+        "padding": 4
     },
     {
-      keyword: "#",
-      padding: 0,
-    },
+        "keyword": "#",
+        "padding": 0
+    }
   ],
-  formatOnSave: false,
-  fixtureLineBreak: true,
-  consecutiveBlankLinesToOne: false,
-};
+  "formatOnSave": false,
+  "fixtureLineBreak": true,
+  "consecutiveBlankLinesToOne": false
+}
+*/
+export class SettingsProvider {
+  get settings(): Settings {
+    const paddingSymbol = config.get('padding').get('symbol') === 'tab' ? '\t' : ' ';
+    const paddingDefault = config.get('padding').get('default') ?? -1;
+    const paddingTable = config.get('padding').get('table') ?? -1;
+    const paddings = config.get('paddings') ?? [];
+    const formatOnSave = config.get('formatOnSave') ?? false;
+    const fixtureLineBreak = config.get('fixtureLineBreak') ?? false;
+    const consecutiveBlankLinesToOne = config.get('consecutiveBlankLinesToOne') ?? false;
+  
+    return {
+      paddingSymbol,
+      paddingDefault,
+      paddingTable,
+      paddings,
+      formatOnSave,
+      fixtureLineBreak,
+      consecutiveBlankLinesToOne,
+    };
+  }
+}
 
 //add the following line
 const program = new Command();
@@ -108,6 +136,7 @@ program
   .version("1.0.0")
   .description("CLI to format Gherkin feature files")
   .option("-v", "Verbose")
+  .option("-s, --settings <filepath>", "Settings file with the rules to use for the formatter")
   .parse(process.argv);
 
 const options = program.opts();
@@ -115,10 +144,18 @@ if (options.v) {
   console.log(figlet.textSync("Gerkiner"));
 }
 
+if (options.settings) {
+  let settingsFilePath = path.resolve(options.settings)
+  process.env['NODE_CONFIG'] = fs.readFileSync(settingsFilePath, "utf-8");
+}
+
+// import after evaluating the optional --settings  
+import config from "config";
+
 let lines = fs.readFileSync(program.args[0], "utf-8").split("\n");
 
 let eb = new TextEditorEdit(new CliTextEditorEdit(lines));
-buildDocument(lines, eb, settings);
+buildDocument(lines, eb, new SettingsProvider().settings);
 
 fs.writeFileSync(program.args[0], lines.join("\n"));
 
