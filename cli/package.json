@@ -2,7 +2,7 @@
   "name": "gherkiner-cli",
   "displayName": "Gherkiner CLI",
   "description": "Awesome formatter for Gherkin features as command line interface",
-  "version": "1.1.0",
+  "version": "0.0.1",
   "publisher": "rmescandon",
   "repository": {
     "type": "git",
