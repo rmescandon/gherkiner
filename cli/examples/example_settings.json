@@ -1,0 +1,60 @@
+{
+  "padding": {
+    "symbol": "space",
+    "default": 4,
+    "table": 10
+  },
+  "formatOnSave": false,
+  "fixtureLineBreak": true,
+  "consecutiveBlankLinesToOne": false,
+  "paddings": [
+    {
+      "keyword": "Feature",
+      "padding": 0
+    },
+    {
+      "keyword": "Scenario Outline",
+      "padding": 2
+    },
+    {
+      "keyword": "Scenario",
+      "padding": 2
+    },
+    {
+      "keyword": "Given",
+      "padding": 4
+    },
+    {
+      "keyword": "When",
+      "padding": 5
+    },
+    {
+      "keyword": "Then",
+      "padding": 5
+    },
+    {
+      "keyword": "And",
+      "padding": 6
+    },
+    {
+      "keyword": "But",
+      "padding": 6
+    },
+    {
+      "keyword": "Backgroud",
+      "padding": 2
+    },
+    {
+      "keyword": "Action",
+      "padding": 2
+    },
+    {
+      "keyword": "Examples:",
+      "padding": 4
+    },
+    {
+      "keyword": "#",
+      "padding": 0
+    }
+  ]
+}
