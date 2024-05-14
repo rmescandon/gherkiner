@@ -1,10 +1,10 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { Settings, Padding } from "./settings";
-import { File } from "./utils";
-import { buildDocument } from "./core";
-import { TextEditorEdit, Range } from "./editor";
+import { Settings, Padding } from "../../shared/out/settings";
+import { File } from "../../shared/out/utils";
+import { buildDocument } from "../../shared/out/core";
+import { TextEditorEdit, Range } from "../../shared/out/editor";
 
 export class SettingsProvider {
   get settings(): Settings {
