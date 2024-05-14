@@ -1,1 +1,0 @@
-{"version":3,"file":"cli.d.ts","sourceRoot":"","sources":["../src/cli.ts"],"names":[],"mappings":"AAEA,OAAO,EAAkB,KAAK,EAAE,MAAM,yBAAyB,CAAC;AAahE,qBAAa,iBAAiB;IAC5B,KAAK,EAAE,MAAM,EAAE,CAAM;gBAET,KAAK,EAAE,MAAM,EAAE;IAI3B,OAAO,CAAC,KAAK,EAAE,KAAK,EAAE,KAAK,EAAE,MAAM,GAAG,IAAI;CAoB3C"}
