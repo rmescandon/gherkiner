@@ -1,7 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import { Settings } from "./settings";
-
 import { Strings } from "./utils";
 import { Line, LineFactory, Lines } from "./line";
 import { Table, TableLine } from "./table";
