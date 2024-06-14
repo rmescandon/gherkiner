@@ -1,8 +1,8 @@
 {
-  "name": "gherkiner-shared",
+  "name": "@gherkiner/shared",
   "version": "0.0.1",
   "description": "shared code amongst gherkiner monorepo projects",
-  "main": "out/index.ts",
+  "main": "lib/index.ts",
   "types": "lib",
   "scripts": {
     "build": "tsc -p ."
