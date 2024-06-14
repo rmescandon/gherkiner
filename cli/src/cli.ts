@@ -1,9 +1,9 @@
 import figlet from "figlet";
 import path from "path";
 import { Command } from "commander";
-import { TextEditorEdit, Range } from "../../shared/out/editor";
-import { buildDocument } from "../../shared/out/core";
-import { Settings, Padding } from "../../shared/out/settings";
+import { TextEditorEdit, Range } from "@gherkiner/shared/lib/editor";
+import { buildDocument } from "@gherkiner/shared/lib/core";
+import { Settings } from "@gherkiner/shared/lib/settings";
 import * as fs from "fs";
 import { exit } from "process";
 
@@ -31,7 +31,7 @@ export class CliTextEditorEdit {
     }
 
     // TODO fill this with more generic case for multiline
-    let line = range.end.line;
+    const line = range.end.line;
     if (this.lines.length <= line) {
       return;
     }
@@ -150,16 +150,16 @@ if (options.v) {
 }
 
 if (options.settings) {
-  let settingsFilePath = path.resolve(options.settings)
+  const settingsFilePath = path.resolve(options.settings)
   process.env['NODE_CONFIG'] = fs.readFileSync(settingsFilePath, "utf-8");
 }
 
 // import after evaluating the optional --settings  
 import config from "config";
 
-let lines = fs.readFileSync(program.args[0], "utf-8").split("\n");
+const lines = fs.readFileSync(program.args[0], "utf-8").split("\n");
 
-let eb = new TextEditorEdit(new CliTextEditorEdit(lines));
+const eb = new TextEditorEdit(new CliTextEditorEdit(lines));
 buildDocument(lines, eb, new SettingsProvider().settings);
 
 fs.writeFileSync(program.args[0], lines.join("\n"));
