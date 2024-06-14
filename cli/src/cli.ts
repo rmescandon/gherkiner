@@ -1,9 +1,9 @@
 import figlet from "figlet";
 import path from "path";
 import { Command } from "commander";
-import { TextEditorEdit, Range } from "@gherkiner/shared/lib/editor";
-import { buildDocument } from "@gherkiner/shared/lib/core";
-import { Settings } from "@gherkiner/shared/lib/settings";
+import { TextEditorEdit, Range } from "gherkiner-shared/lib/editor";
+import { buildDocument } from "gherkiner-shared/lib/core";
+import { Settings } from "gherkiner-shared/lib/settings";
 import * as fs from "fs";
 import { exit } from "process";
 

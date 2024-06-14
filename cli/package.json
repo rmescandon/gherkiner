@@ -26,10 +26,18 @@
   "dependencies": {
     "commander": "^11.1.0",
     "config": "^3.3.11",
-    "figlet": "^1.7.0"
+    "figlet": "^1.7.0",
+    "gherkiner-shared": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
     "typescript": "^5.4.5"
-  }
+  },
+  "files": [
+    "out",
+    "bin",
+    "examples",
+    "LICENSE",
+    "README.md"
+  ]
 }

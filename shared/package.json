@@ -1,5 +1,5 @@
 {
-  "name": "@gherkiner/shared",
+  "name": "gherkiner-shared",
   "version": "0.0.1",
   "description": "shared code amongst gherkiner monorepo projects",
   "main": "lib/index.ts",
@@ -9,5 +9,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "directories": {
+    "lib": "lib"
+  }
 }
