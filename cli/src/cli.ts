@@ -136,7 +136,7 @@ program
   .version("1.0.0")
   .description("CLI to format Gherkin feature files")
   .option("-v", "verbose execution")
-  .option("-s, --settings <filepath>", "settings file with the rules to use for the formatter")
+  .requiredOption("-s, --settings <filepath>", "settings file with the rules to use for the formatter")
   .parse(process.argv);
 
 const options = program.opts();
