@@ -4,7 +4,6 @@
     "default": 4,
     "table": 10
   },
-  "formatOnSave": false,
   "fixtureLineBreak": true,
   "consecutiveBlankLinesToOne": false,
   "paddings": [
