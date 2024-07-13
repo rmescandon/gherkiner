@@ -2,7 +2,7 @@
   "name": "gherkiner-cli",
   "displayName": "Gherkiner CLI",
   "description": "Awesome formatter for Gherkin features as command line interface",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "rmescandon",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "start": "npm run build -- --watch"
   },
   "bin": {
-    "gherkiner": "./bin/gherkiner"
+    "gherkiner": "./out/cli.js"
   },
   "dependencies": {
     "commander": "^11.1.0",
@@ -35,7 +35,6 @@
   },
   "files": [
     "out",
-    "bin",
     "examples",
     "LICENSE",
     "README.md"

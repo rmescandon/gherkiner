@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import figlet from "figlet";
 import path from "path";
 import { Command } from "commander";
@@ -6,6 +8,7 @@ import { buildDocument } from "gherkiner-shared/lib/core";
 import { Settings } from "gherkiner-shared/lib/settings";
 import * as fs from "fs";
 import { exit } from "process";
+import {version} from '../package.json';
 
 function replaceRange(
   s: string,
@@ -133,7 +136,7 @@ export class SettingsProvider {
 const program = new Command();
 
 program
-  .version("1.0.0")
+  .version(version)
   .description("CLI to format Gherkin feature files")
   .option("-v", "verbose execution")
   .requiredOption("-s, --settings <filepath>", "settings file with the rules to use for the formatter")
